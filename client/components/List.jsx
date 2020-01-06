@@ -1,9 +1,7 @@
 import React from 'react';
+import ReactDOM from 'react-dom';
 import ListEntry from './ListEntry.jsx';
 
-
-//import { Component } from 'react'; ///same as below.
-//class List extends Component {};
 class List extends React.Component {
     constructor(props) {
         super(props)
@@ -12,41 +10,50 @@ class List extends React.Component {
             todos: []
         }
         this.onChangeHandler = this.onChangeHandler.bind(this);
-        this.onSubmitHander = this.onSubmitHander.bind(this);
+        this.onSubmitHandler = this.onSubmitHandler.bind(this);
     }
 
-    onChangeHandler(e) {
+    onChangeHandler (e) {
         e.preventDefault();
-        this.setState({
-            [e.target.name]: e.target.value
-        }, () => console.log(this.state)) 
-        //this logs what was input on console.
+        this.setState ({
+            [e.target.name]: e.target.value //[e.target.name] same as 'todo'.
+        }, () => {console.log(this.state)})
     }
 
-
-    onSubmitHander(e) {
+    onSubmitHandler (e) {
         e.preventDefault();
-
+        
         let currentTodos = this.state.todos;
         currentTodos.push(this.state.todo);
 
         this.setState({
             todos: currentTodos,
             todo: ''
-        }, () => console.log(this.state))
+        }, () => {console.log(this.state)});
         document.getElementById('form').reset();
     }
 
-    render () {
-        return (
+    // CRUD (create, read, update, delete) 
+
+    onSelectHandler () {
+        e.preventDefault();
+        this.setState({
+
+        })
+    }
+
+
+
+    render() {
+        return(
             <div>
-                <form id='form' onSubmit={this.onSubmitHander}>
-                    <label>
-                        New Todo:
-                        <input name='todo' required onChange={this.onChangeHandler} placeholder='Enter todo'/>
+                <form id='form' onSubmit={this.onSubmitHandler}>
+                    <label>Todo List
+                        {/* name='todo' is pointing to e.target.name */}
+                        <input name='todo' required onChange={this.onChangeHandler}/>
                     </label>
-                        <input type="submit" value="Submit"/>
-                </form> 
+                    <input type='submit' value='Submit'/>
+                </form>
                 <ul>
                 {this.state.todos.map((todo, index) => (
                     <ListEntry todo={todo} key={index} index={index}/>
@@ -55,7 +62,7 @@ class List extends React.Component {
             </div>
         )
     }
-
 }
+
 
 export default List;

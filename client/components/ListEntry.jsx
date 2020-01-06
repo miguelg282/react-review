@@ -1,16 +1,16 @@
 import React from 'react';
+// import List from './List';
 
 class ListEntry extends React.Component {
-    constructor(props) {
+    constructor(props){
         super(props)
-        this.state = {
-
-        }
     }
 
     render() {
         return (
-        <li>{this.props.todo}</li>
+            <div>
+                <li>{this.props.todo}/</li>
+            </div>
         )
     }
 }

@@ -1,58 +1,48 @@
-//App file
-import React from 'react';
-import List from './List.jsx';
+import React from "react";
+import List from "./List.jsx";
 
-///////stateful class component///////////
-class App extends React.Component { 
-    constructor(props){
-        super(props)
-        this.state = {
-            firstName: '',
-            lastName: '',
-            todo: '',
-            todos: []
-        }
-        this.onChangeHandler = this.onChangeHandler.bind(this);
-    }
+class App extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      firstName: '',
+      lastName: '',
+    };
 
-    onChangeHandler(e) {
-        e.preventDefault();
-        this.setState({
-            [e.target.name]: e.target.value
-        }, () => console.log(this.state)) 
-        //this logs what was input on console.
-    }
+    this.onChangeHandler = this.onChangeHandler.bind(this);
+  }
 
-
-
-    render() {
-        return (
-            <div>
-                {
-                this.state.firstName === this.state.firstName &&
-                 this.state.lastName === this.state.lastName ? (<List />) : (
-                    <form>
-                    <div></div>
-                    <label>
-                        First Name: 
-                    <input name="firstName" placeholder='Type First Name' onChange={this.onChangeHandler}/>
-                    </label>
-                    <label>
-                        Last Name: 
-                    <input name="lastName" placeholder='Type Last Name' onChange={this.onChangeHandler}/>
-                    </label>
-                </form>
-                )
-                }
-            </div>
-        )
-    }
+  onChangeHandler(e) {
+    this.setState({
+        [e.target.name]: e.target.value
+    }, () => console.log(this.state)) 
 }
-export default App;
 
-////////functional component////////////
-// function App (props) { 
-//    return (
-//        <div> Hello form App component</div>
-//    )
-// }
+  render() {
+    return  (
+            <div>
+           {
+                this.state.firstName === this.props.firstName &&
+                this.state.lastName === this.props.lastName ? ( <List /> ) : (
+                    <form>
+                   <label>
+                       First Name:
+                       <input name='firstName' onChange={this.onChangeHandler}/>
+                   </label>
+                   <div></div>
+                   <label>
+                       Last Name:
+                       <input name='lastName' onChange={this.onChangeHandler}/>
+                   </label>
+                   </form>
+                )
+   
+                   
+           }
+            </div>
+        
+    )
+  }
+}
+
+export default App;
